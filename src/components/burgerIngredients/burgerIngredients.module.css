@@ -1,0 +1,35 @@
+.burgerIngredients {
+    max-width: 600px;
+    margin: 0 60px;
+}
+
+.menu {
+    display: flex;
+    margin: 0 0 40px;
+    padding: 0;
+}
+
+.ingredients {
+    height: 800px;
+    overflow-y: scroll;
+}
+
+.ingredients::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .ingredients::-webkit-scrollbar-track {
+    background: #2F2F37;
+  }
+  
+  .ingredients::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+  }
+
+.lists {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
