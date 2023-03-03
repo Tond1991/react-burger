@@ -22,5 +22,7 @@
     cursor: pointer;
     margin: 0;
     gap: 9px;
+    text-decoration: none;
+    color: white;
 }
 

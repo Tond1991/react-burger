@@ -11,24 +11,24 @@ function Header() {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.leftLinks}>
-          <div className={styles.link}>
+          <a href="#" className={styles.link}>
             <BurgerIcon type="primary" />
             <p className="text text_type_main-default">Конструктор</p>
-          </div>
-          <div className={styles.link}>
+          </a>
+          <a href="#" className={styles.link}>
             <ListIcon type="secondary"/>
             <p className="text text_type_main-default text_color_inactive">
               Лента&nbsp;заказов
             </p>
-          </div>
+          </a>
         </div>
         <Logo />
-        <div className={styles.link}>
+        <a href="#" className={styles.link}>
             <ProfileIcon ProfileIcon type="secondary"/>
             <p className="text text_type_main-default text_color_inactive">
               Лента&nbsp;заказов
             </p>
-      </div>
+      </a>
       </div>
     </header>
   );

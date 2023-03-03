@@ -4,6 +4,8 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from 'prop-types';
+
 
 function IngredientCard({ image, name, price, _id }) {
   return (
@@ -18,5 +20,13 @@ function IngredientCard({ image, name, price, _id }) {
     </li>
   );
 }
+
+IngredientCard.propTypes = {
+  image: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  _id: PropTypes.string.isRequired
+}
+
 
 export default IngredientCard;
