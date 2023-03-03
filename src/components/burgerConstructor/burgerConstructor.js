@@ -48,7 +48,7 @@ function BurgerConstructor() {
 
       <div className={styles.result}>
         <div className={styles.price}>
-        <p className="text text_type_digits-medium">610</p>
+        <p className="text text_type_digits-medium">19010</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button htmlType="button" type="primary" size="large">
