@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 80px 0 60px;
+    padding: 0
+}
+
+.order {
+    margin: 0 0 32px;
+    padding: 0;
+}
+
+.done {
+    width: 120px;
+    height: 120px;
+    margin: 60px 0 0;
+    background-image: url("../images/done.svg");
+    background-repeat: no-repeat;
+    background-position: center;  
+}

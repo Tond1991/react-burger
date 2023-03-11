@@ -1,15 +1,32 @@
 import React from 'react';
-import logo from '../../logo.svg';
 import './app.module.css';
 import Header from '../header/header'
 import Main from '../main/main'
+const URL = 'https://norma.nomoreparties.space/api/ingredients';
 
 
-function App() {
+const App = () => {
+ let [menu, setMenu] = React.useState([]);
+
+   React.useEffect(() => {
+    const getIngredients = async () => {
+       try {
+        const res = await fetch(URL)
+        const data = await res.json();
+        setMenu(data.data);
+      } catch(err) {
+        console.log(err.message)
+          }
+    }
+
+    getIngredients();
+   }, [])
+
+
   return (
    <>
     <Header />
-    <Main />
+    <Main menu={menu}/>
    </>
   );
 }

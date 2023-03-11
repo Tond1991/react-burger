@@ -1,19 +1,47 @@
 import styles from "./burgerConstructor.module.css";
 import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import data from "../utils/data";
+import Modal from "../modal/modal";
+import OrderDetails from "../orderDetails/orderDetails";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function BurgerConstructor() {
+
+function BurgerConstructor({data}) {
+  const [openModal, setModal] = React.useState(false);
+
+  const activeModal = () => {
+    setModal(true);
+  }
+
+  const inactiveModal = () => {
+    setModal(false);
+  }
+
+  
+  const escBtn = e => {
+    if ((e.charCode || e.keyCode) === 27) {
+      setModal(false);
+    }
+  }
+
+  React.useEffect(() => {
+    document.body.addEventListener("keydown", escBtn);
+    return function cleanHeandler() {
+      document.body.removeEventListener("keydown", escBtn)
+    }
+  }, [])
+
   return (
     <section className={styles.order}>
       <div className={styles.components}>
         <div className={styles.component}>
-            <ConstructorElement 
+            { data[0] && <ConstructorElement 
                  type="top"
                  isLocked={true}
                  text={data[0].name}
                  price={data[0].price}
                  thumbnail={data[0].image}
-            />
+            />}
         </div>
       </div>
 
@@ -30,19 +58,20 @@ function BurgerConstructor() {
                     />
                 </li>
             )}
+            return null
           }
         )}
       </ul>
 
       <div className={styles.components}>
         <div className={styles.component}>
-            <ConstructorElement 
+            {data[0]  && <ConstructorElement 
                  type="bottom"
                  isLocked={true}
                  text={data[0].name}
                  price={data[0].price}
                  thumbnail={data[0].image}
-            />
+            />}
         </div>
       </div>
 
@@ -51,12 +80,22 @@ function BurgerConstructor() {
         <p className="text text_type_digits-medium">19010</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large" onClick={activeModal}>
           Оформить заказ
         </Button>
       </div>
+              
+              <Modal openModal={openModal} closeModal={inactiveModal}>
+                <OrderDetails />
+              </Modal>
+
     </section>
   );
 }
+
+
+BurgerConstructor.propTypes = {
+   data: PropTypes.object.isRequired,
+};
 
 export default BurgerConstructor;
