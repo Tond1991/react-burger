@@ -11,30 +11,16 @@ function BurgerIngredients({ data }) {
   const SAUCE = "sauce";
   const MAIN = "main";
   const [current, setCurrent] = React.useState(BUN);
-  const [openModal, setModal] = React.useState(false);
-  const [objItem, setObjItem] = React.useState([]);
+  const [objItem, setObjItem] = React.useState(null);
 
   const activeModal = (obj) => {
-    setModal(true);
     setObjItem(obj);
   };
 
   const inactiveModal = () => {
-    setModal(false);
+    setObjItem(null);
   };
 
-  const escBtn = (e) => {
-    if ((e.charCode || e.keyCode) === 27) {
-      setModal(false);
-    }
-  };
-
-  React.useEffect(() => {
-    document.body.addEventListener("keydown", escBtn);
-    return function cleanHeandler() {
-      document.body.removeEventListener("keydown", escBtn);
-    };
-  });
   return (
     <section className={styles.burgerIngredients}>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
@@ -79,15 +65,16 @@ function BurgerIngredients({ data }) {
           })}
         </ul>
       </div>
-      <Modal openModal={openModal} closeModal={inactiveModal}>
+      
+      {objItem && <Modal closeModal={inactiveModal}>
         <IngredientDetails item={objItem}/>
-      </Modal>
+      </Modal>}
     </section>
   );
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default BurgerIngredients;

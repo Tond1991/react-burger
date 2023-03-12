@@ -17,21 +17,7 @@ function BurgerConstructor({data}) {
     setModal(false);
   }
 
-  
-  const escBtn = e => {
-    if ((e.charCode || e.keyCode) === 27) {
-      setModal(false);
-    }
-  }
-
-  React.useEffect(() => {
-    document.body.addEventListener("keydown", escBtn);
-    return function cleanHeandler() {
-      document.body.removeEventListener("keydown", escBtn)
-    }
-  }, [])
-
-  return (
+    return (
     <section className={styles.order}>
       <div className={styles.components}>
         <div className={styles.component}>
@@ -85,9 +71,9 @@ function BurgerConstructor({data}) {
         </Button>
       </div>
               
-              <Modal openModal={openModal} closeModal={inactiveModal}>
+            {  openModal && <Modal closeModal={inactiveModal}>
                 <OrderDetails />
-              </Modal>
+              </Modal>}
 
     </section>
   );

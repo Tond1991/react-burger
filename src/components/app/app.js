@@ -6,7 +6,7 @@ const URL = 'https://norma.nomoreparties.space/api/ingredients';
 
 
 const App = () => {
- let [menu, setMenu] = React.useState([]);
+ const [menu, setMenu] = React.useState([]);
 
    React.useEffect(() => {
     const getIngredients = async () => {
@@ -14,6 +14,7 @@ const App = () => {
         const res = await fetch(URL)
         const data = await res.json();
         setMenu(data.data);
+        return res.ok ? res.json() : res.json().then((err) => Promise.reject(err))
       } catch(err) {
         console.log(err.message)
           }
