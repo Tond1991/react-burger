@@ -7,13 +7,14 @@ import {
 import Modal from "../modal/modal";
 import OrderDetails from "../orderDetails/orderDetails";
 import React from "react";
-import PropTypes from "prop-types";
 import { BurgerIngredientsContext } from "../../services/BurgerIngredientsContext";
+import { IngredientStorageContext } from "../../services/IngredientStorageContext";
+import {dataId} from "../utils/data.js"
 
 function BurgerConstructor() {
   const [openModal, setModal] = React.useState(false);
+  const {productList, setProductList} = React.useContext(IngredientStorageContext);
   const { menu } = React.useContext(BurgerIngredientsContext);
-  console.log(menu);
   const activeModal = () => {
     setModal(true);
   };
@@ -21,9 +22,30 @@ function BurgerConstructor() {
   const inactiveModal = () => {
     setModal(false);
   };
-  
+
+  const order = {
+    content: [],
+    price: 0
+  };
+
+  const addIngredients = (ingredients) =>{
+    dataId.content.forEach(element => {
+      order.content.push(ingredients.find(el => {
+        if (el._id === element.id) {
+          order.price += el.price;
+          return true
+        }
+        return false
+      }))
+    })
+    setProductList(order)
+  };
+
+React.useEffect(()=>{addIngredients(menu)},[])
+
+
+
   const buns = menu.filter((item) => item.type === 'bun')
-console.log(buns)
   const bunBottom = menu.map((item) => {
     return(
       <ConstructorElement
@@ -41,20 +63,7 @@ console.log(buns)
     <section className={styles.order}>
       <div className={styles.components}>
         <div className={styles.component}>
-       {buns.map((item) => {
-        if (item._id) {
-          return(
-            <ConstructorElement
-                        key={item._id}
-                        type="top"
-                        isLocked={true}
-                        price={item.price}
-                        text={item.name}
-                        thumbnail={item.image}
-                      />
-          )
-        }
-       })}
+       {buns[0]}
         {/*menu.map((obj) => {
             if (obj.type === 'bun' ) {
               return (
@@ -121,7 +130,7 @@ console.log(buns)
 
       <div className={styles.result}>
         <div className={styles.price}>
-          <p className="text text_type_digits-medium">19010</p>
+          <p className="text text_type_digits-medium">{productList.price}</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button
@@ -142,9 +151,5 @@ console.log(buns)
     </section>
   );
 }
-
-BurgerConstructor.propTypes = {
-  menu: PropTypes.object.isRequired,
-};
 
 export default BurgerConstructor;
