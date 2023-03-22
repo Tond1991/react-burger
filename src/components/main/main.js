@@ -3,12 +3,11 @@ import BurgerConstructor from "../burgerConstructor/burgerConstructor";
 import styles from "./main.module.css";
 import PropTypes from "prop-types";
 
-function Main({ menu }) {
-  console.log(menu)
+function Main() {
   return (
     <main className={styles.main}>
-      <BurgerIngredients data={menu} />
-      <BurgerConstructor data={menu} />
+      <BurgerIngredients />
+      <BurgerConstructor />
     </main>
   );
 }
