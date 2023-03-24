@@ -39,7 +39,6 @@ const Modal = (props) => {
 
 
 Modal.propTypes = {
-    openModal: PropTypes.func.isRequired,
     closeModal: PropTypes.func.isRequired
  };
 
